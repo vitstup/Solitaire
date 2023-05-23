@@ -25,10 +25,17 @@ public abstract class CardHolder : MonoBehaviour, IDropHandler
         return holderRect.transform.TransformPoint(rectPos);
     }
 
-    public void AddCard(Card card)
+    public void AddCard(Card card, bool addToDown = false)
     {
         card.rect.SetParent(holderRect);
-        cards.Add(card);
+
+        if (!addToDown) cards.Add(card);
+        else
+        {
+            cards.Insert(0, card);
+            card.transform.SetAsFirstSibling();
+        }
+
         ForceLayout();
     }
 
@@ -80,5 +87,10 @@ public abstract class CardHolder : MonoBehaviour, IDropHandler
             nextCards[i] = cards[i + cardIndex];
         }
         return nextCards;
+    }
+
+    public void ClearCards()
+    {
+        cards.Clear();
     }
 }

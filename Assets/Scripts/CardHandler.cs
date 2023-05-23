@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Zenject;
 
 public class CardHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    [Inject] AudioManager audioManager;
     private CanvasGroup canvasGroup;
     private Card card;
     private Canvas canvas;
@@ -15,12 +17,16 @@ public class CardHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         canvasGroup = GetComponent<CanvasGroup>();
         card = GetComponent<Card>();
         canvas = GetComponentInParent<Canvas>(true);
+
+        draggingCards = new Card[0];
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (card.interactability)
         {
+            audioManager.PlayCardTaken();
+
             holder = GetComponentInParent<CardHolder>(true);
 
             draggingCards = holder.GetNextCards(card);
@@ -47,6 +53,7 @@ public class CardHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        audioManager.PlayCardSetted();
         for (int i = 0; i < draggingCards.Length; i++)
         {
             canvasGroup.blocksRaycasts = true;

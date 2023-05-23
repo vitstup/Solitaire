@@ -53,7 +53,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6448326240542934786}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -129,3 +129,4 @@ MonoBehaviour:
   spacing: {x: -0.5, y: 0.5}
   holderRect: {fileID: 6448326240542934787}
   cardPrefab: {fileID: 1848511693199853195, guid: bada65289a62fb34ead2f756d67f7c5f, type: 3}
+  CanChangeDraw: 0

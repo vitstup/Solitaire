@@ -10,8 +10,9 @@ public class CellsManager : MonoBehaviour
 
     [SerializeField] private float animationTime = 0.15f;
 
-    public IEnumerator InitializeCells(List<Card> cards)
+    public IEnumerator InitializeCells(Deck deck, List<Card> cards)
     {
+        deck.CanChangeDraw = false;
         for (int i = 0; i < cells.Length; i++)
         {
             int fillAmount = i + 1;
@@ -27,5 +28,6 @@ public class CellsManager : MonoBehaviour
                 cards.Remove(card);
             }
         }
+        deck.CanChangeDraw = true;
     }
 }
